@@ -15,11 +15,14 @@ Features:
     - CSV
     
     
-![Image of Yaktocat](https://github.com/agarasul/Localized/blob/master/screenshots/Screen%20Shot%202020-04-28%20at%2017.18.41.png)
-
-
 Link for download:
 [Localized.jar](https://github.com/agarasul/Localized/releases/download/1.0/Localized.jar)
+
+    
+![](https://github.com/agarasul/Localized/blob/master/screenshots/Screen%20Shot%202020-04-28%20at%2017.18.41.png)
+
+
+
 
 
 License
