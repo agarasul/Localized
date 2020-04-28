@@ -19,7 +19,7 @@
         </Button>
         <TableView fx:id="tableView" layoutX="14.0" layoutY="95.0" prefHeight="360.0" prefWidth="775.0">
         </TableView>
-        <Label fx:id="totalCountLabel" layoutX="14.0" layoutY="485.0" prefHeight="24.0">
+        <Label fx:id="totalCountLabel" layoutX="14.0" layoutY="485.0" prefHeight="24.0" text="Total Count :">
             <font>
                 <Font name="Roboto" size="19.0" />
             </font>
@@ -37,6 +37,6 @@
             </toggleGroup>
         </RadioButton>
         <RadioButton fx:id="androidRdb" layoutX="458.0" layoutY="488.0" mnemonicParsing="false" text="Android( strings.xml )" toggleGroup="$radioGroup" />
-      <RadioButton fx:id="iosRdb" layoutX="314.0" layoutY="488.0" mnemonicParsing="false" text="Localizable.strings" toggleGroup="$radioGroup"  />
+      <RadioButton fx:id="iosRdb" layoutX="314.0" layoutY="488.0" mnemonicParsing="false" text="Localizable.strings" />
     </children>
 </Pane>
