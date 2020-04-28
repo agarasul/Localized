@@ -19,5 +19,5 @@ Features:
 
 
 Link for download:
-https://github.com/agarasul/Localized/releases
+[Localized.jar](https://github.com/agarasul/Localized/releases/download/1.0/Localized.jar)
 
