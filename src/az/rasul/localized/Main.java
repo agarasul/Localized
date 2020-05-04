@@ -16,7 +16,10 @@ public class Main extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("fxml/main.fxml"));
         primaryStage.setTitle("Localized");
         primaryStage.setScene(new Scene(root, 800, 530));
+        primaryStage.setMinHeight(320f);
+        primaryStage.setMinWidth(620f);
         primaryStage.show();
+
 
         primaryStage.setOnCloseRequest((ae) -> {
             Platform.exit();

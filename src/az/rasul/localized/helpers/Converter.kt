@@ -36,22 +36,11 @@ object Converter {
     private fun convertToIOSFormat(file: File, parsedData: List<Data>) {
         var str = ""
         parsedData.forEach {
-
-
-
-            str += "\"${it.key}\" = \"${it.value}\";" + System.lineSeparator()
+            str += "\"${it.key}\" = \"${replacePlaceHoldersForIOS(it.value)}\";" + System.lineSeparator()
         }
         file.writeText(str, Charset.defaultCharset())
     }
 
-
-
-    private fun replacePlaceHoldersForIOS(){
-        val placeholders = arrayListOf<String>("%2\$d")
-
-
-
-    }
 
     private fun convertToCSVFormat(file: File, parsedData: List<Data>) {
         var str = ""
@@ -82,7 +71,7 @@ object Converter {
                 it.value = it.value.replace("'", "\\'")
             }
 
-            element.appendChild(doc.createTextNode(it.value))
+            element.appendChild(doc.createTextNode(replacePlaceHoldersForAndroid(it.value)))
             resourcesElement.appendChild(element)
         }
 
@@ -96,4 +85,27 @@ object Converter {
         val result = StreamResult(file)
         transformer.transform(source, result)
     }
+
+    private fun replacePlaceHoldersForAndroid(value: String): String {
+        var newString = value
+        if (value.contains("%d")) {
+            newString = value.replace("%d", "%\$d")
+        }
+        if (value.contains("%@")) {
+            newString = value.replace("%@", "%\$s")
+        }
+        return newString
+    }
+
+    private fun replacePlaceHoldersForIOS(value: String): String {
+        var newString = value
+        if (value.contains("%\$d")) {
+            newString = value.replace("%\$d", "%d")
+        }
+        if (value.contains("%\$s")) {
+            newString = value.replace("%\$s", "%@")
+        }
+        return newString
+    }
+
 }

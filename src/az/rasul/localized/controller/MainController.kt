@@ -9,6 +9,7 @@ import javafx.fxml.FXML
 import javafx.fxml.Initializable
 import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
+import javafx.scene.layout.AnchorPane
 import javafx.scene.layout.Pane
 import javafx.stage.FileChooser
 import javafx.util.Callback
@@ -17,7 +18,7 @@ import java.net.URL
 import java.util.*
 
 
-class Controller : Initializable {
+class MainController : Initializable {
 
 //    private val parsedData = arrayListOf<Data>()
 
@@ -27,16 +28,13 @@ class Controller : Initializable {
     private var localizableFile: File? = null
 
     @FXML
-    private var mainPane: Pane? = null
+    private var mainPane: AnchorPane? = null
 
     @FXML
     private var filePathTextField: TextField? = null
 
     @FXML
     private var browseBtn: Button? = null
-
-//    @FXML
-//    private var convertBtn: Button? = null
 
     @FXML
     private var exportBtn: Button? = null
@@ -69,24 +67,14 @@ class Controller : Initializable {
         this.browseBtn?.setOnAction(this::onBrowseBtnClicked)
 //        this.convertBtn?.setOnAction(this::onConvertBtnClicked)
         this.exportBtn?.setOnAction(this::onExportBtnClicked)
-
-
-
         radioGroup.selectedToggleProperty().addListener { observable, oldValue, newValue ->
-//            System.out.println("Selected Radio Button: " + (newValue as RadioButton).id)
             type = (newValue as RadioButton).id
         }
-
         setupTableView()
-
-//        csvRdb?.toggleGroup = radioGroup
-//        androidRdb?.toggleGroup = radioGroup
     }
 
 
     private fun setupTableView() {
-//        tableView?.isEditable = true
-
         val column1: TableColumn<Data, String> = TableColumn("Key")
         column1.cellValueFactory = PropertyValueFactory("key")
 
@@ -184,7 +172,6 @@ class Controller : Initializable {
 
                 }
                 totalCountLabel?.text = "Total count = ${parsedData.size}"
-//                tableView?.items?.setAll(parsedData)
 
             } catch (e: Exception) {
                 e.printStackTrace()
@@ -196,11 +183,6 @@ class Controller : Initializable {
                 showErrorAlert(message = "Parse error. Please ensure that your file is correct and try again!")
             }
         }
-
-//        println("Formatted ---------------------------------------------------------")
-//        parsedData.forEach {
-//            println(it)
-//        }
     }
 
 
@@ -217,6 +199,4 @@ class Controller : Initializable {
         alert.contentText = message
         alert.show()
     }
-
-
 }
