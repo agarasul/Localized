@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane fx:id="mainPane" prefHeight="530.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="az.rasul.localized.Controller">
+<Pane fx:id="mainPane" prefHeight="530.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="az.rasul.localized.controller.Controller">
     <children>
         <TextField fx:id="filePathTextField" disable="true" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="633.0" promptText="Select Localizable.strings or strings.xml" />
         <Button fx:id="browseBtn" layoutX="657.0" layoutY="14.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="133.0" text="Browse">
@@ -17,14 +17,13 @@
                 <Font name="Roboto" size="13.0" />
             </font>
         </Button>
-        <TableView fx:id="tableView" layoutX="14.0" layoutY="95.0" prefHeight="360.0" prefWidth="775.0">
+        <TableView fx:id="tableView" editable="true" layoutX="14.0" layoutY="54.0" prefHeight="401.0" prefWidth="775.0">
         </TableView>
         <Label fx:id="totalCountLabel" layoutX="14.0" layoutY="485.0" prefHeight="24.0" text="Total Count :">
             <font>
-                <Font name="Roboto" size="19.0" />
+                <Font name="Roboto" size="10.0" />
             </font>
         </Label>
-        <ProgressBar fx:id="progressBar" layoutX="14.0" layoutY="55.0" prefHeight="20.0" prefWidth="775.0" progress="0.0" />
         <Button fx:id="exportBtn" layoutX="676.0" layoutY="483.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="113.0" text="Export">
             <font>
                 <Font name="Roboto" size="13.0" />

@@ -1,8 +1,8 @@
 package az.rasul.localized.model
 
 data class Data(
-        val key: String,
-        val value: String
+        var key: String,
+        var value: String
 ) {
     override fun toString(): String {
 

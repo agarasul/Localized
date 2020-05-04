@@ -10,11 +10,10 @@ import javafx.stage.Stage;
 public class Main extends Application {
 
 
-
     @Override
-    public void start(Stage primaryStage) throws Exception{
+    public void start(Stage primaryStage) throws Exception {
         Platform.setImplicitExit(true);
-        Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("fxml/main.fxml"));
         primaryStage.setTitle("Localized");
         primaryStage.setScene(new Scene(root, 800, 530));
         primaryStage.show();
@@ -23,9 +22,9 @@ public class Main extends Application {
             Platform.exit();
             System.exit(0);
         });
+
+
     }
-
-
 
 
     public static void main(String[] args) {
