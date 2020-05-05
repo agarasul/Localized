@@ -10,13 +10,13 @@ Features:
 
 - Show parsed strings in user friendly interface
 - Work with multiple formats:
-    - Android strings.xml
-    - Apple Localizable.strings
+    - Android strings.xml including their placeholders
+    - Apple Localizable.strings including their placeholders
     - CSV
     
     
 Link for download:
-[Localized.jar](https://github.com/agarasul/Localized/releases/download/1.0/Localized.jar)
+[Localized.jar](https://github.com/agarasul/Localized/releases/download/1.0.1/Localized.jar)
 
     
 ![](https://github.com/agarasul/Localized/blob/master/screenshots/Screen%20Shot%202020-04-28%20at%2017.18.41.png)
