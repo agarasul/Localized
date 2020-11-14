@@ -1,8 +1,9 @@
 package az.rasul.localized.controller
 
-import az.rasul.localized.helpers.Converter
-import az.rasul.localized.helpers.Parser
 import az.rasul.localized.model.Data
+import az.rasul.localized.localizers.AndroidStrings
+import az.rasul.localized.localizers.CSV
+import az.rasul.localized.localizers.LocalizableStrings
 import javafx.collections.FXCollections
 import javafx.event.ActionEvent
 import javafx.fxml.FXML
@@ -10,9 +11,7 @@ import javafx.fxml.Initializable
 import javafx.scene.control.*
 import javafx.scene.control.cell.PropertyValueFactory
 import javafx.scene.layout.AnchorPane
-import javafx.scene.layout.Pane
 import javafx.stage.FileChooser
-import javafx.util.Callback
 import java.io.File
 import java.net.URL
 import java.util.*
@@ -126,7 +125,24 @@ class MainController : Initializable {
                 }
             }
             if (fileToSave != null) {
-                val isSuccess = Converter.convert(type, fileToSave, parsedData)
+
+                var isSuccess = false
+                try {
+                    when (type) {
+                        "androidRdb" -> {
+                            AndroidStrings.convertToXml(fileToSave, parsedData)
+                        }
+                        "iosRdb" -> {
+                            LocalizableStrings.convertToIOSFormat(fileToSave, parsedData)
+                        }
+                        "csvRdb" -> {
+                            CSV.convert(fileToSave, parsedData)
+                        }
+                    }
+                } catch (e: Exception) {
+                    isSuccess = false
+                }
+
                 if (isSuccess) {
                     showSuccessAlert(filePath = fileToSave.absolutePath)
                 } else {
@@ -160,16 +176,14 @@ class MainController : Initializable {
 
                 when (extension) {
                     ".xml" -> {
-                        parsedData.addAll(Parser.parseFromFromXml(localizableFile!!))
+                        parsedData.addAll(AndroidStrings.parseFromFromXml(localizableFile!!))
                     }
                     ".strings" -> {
-                        parsedData.addAll(Parser.parseFromLocalizableString(localizableFile!!))
+                        parsedData.addAll(LocalizableStrings.parseFromString(localizableFile!!))
                     }
                     ".csv" -> {
-                        parsedData.addAll(Parser.parseFromFromCSV(localizableFile!!))
+                        parsedData.addAll(CSV.parseFromFromCSV(localizableFile!!))
                     }
-
-
                 }
                 totalCountLabel?.text = "Total count = ${parsedData.size}"
 

@@ -1,57 +1,24 @@
-package az.rasul.localized.helpers
+package az.rasul.localized.localizers
 
 import az.rasul.localized.model.Data
-import org.w3c.dom.Element
-import org.w3c.dom.Node
 import java.io.File
+import java.nio.charset.Charset
 import java.nio.charset.StandardCharsets
 import java.nio.file.Files
-import javax.xml.parsers.DocumentBuilderFactory
-
-object Parser {
+import java.util.regex.Pattern
 
 
-    /**
-     * The method that parse strings.xml
-     * @param file strings.xml file
-     * @return List with parsed data
-     */
-    fun parseFromFromXml(file: File): List<Data> {
-        val parsedData = arrayListOf<Data>()
-        val dbFactory = DocumentBuilderFactory.newInstance()
-        val dBuilder = dbFactory.newDocumentBuilder()
-        val doc = dBuilder.parse(file)
-
-        doc.documentElement.normalize()
+object LocalizableStrings {
 
 
-        val nList = doc.getElementsByTagName("string")
-
-
-        for (i in 0 until nList.length) {
-            val nNode = nList.item(i)
-            if (nNode.nodeType == Node.ELEMENT_NODE) {
-
-                val element = nNode as Element
-
-
-                val key = element.getAttribute("name")
-                val value = element.firstChild.textContent
-
-                parsedData.add(Data(key, value))
-            }
-
-        }
-        return parsedData
-    }
-
+    const val PATTERN = "[%][\\d]?[0-9]?[\$][a-z]"
 
     /**
      * The method that parse Localizable.strings file
      * @param file Localizable.strings file
      * @return List with parsed data
      */
-    fun parseFromLocalizableString(file: File): List<Data> {
+    fun parseFromString(file: File): List<Data> {
         val parsedData = arrayListOf<Data>()
         val content = String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8)
 
@@ -79,9 +46,9 @@ object Parser {
 
                     var key = newLine.substring(1, keyEndIndex) // Конечная строка (Ключ)
 
-                    while (key.contains(".")) {
-                        key = key.replace(".", "")
-                    }
+//                    while (key.contains(".")) {
+//                        key = key.replace(".", "")
+//                    }
 
                     val valueString = newLine.substring(equalSignIndex, newLine.count())
                     val valueStartIndex = equalSignIndex + valueString.indexOfFirst { it == '"' } + 1 // Находим позицию начала значения
@@ -99,28 +66,50 @@ object Parser {
     }
 
 
-    /**
-     * The method that parse CSV file
-     * @param file CSV file
-     * @return List with parsed data
-     */
-    fun parseFromFromCSV(file: File): List<Data> {
-        val parsedData = arrayListOf<Data>()
-        val content = String(Files.readAllBytes(file.toPath()), StandardCharsets.UTF_8)
 
-        content.lines().forEachIndexed { index, it ->
-
-            if (!it.isNullOrBlank()) {
-                val keyEndIndex = it.indexOfFirst { it == ',' }
-
-                val key = it.substring(0, keyEndIndex)
-                val value = it.substring(keyEndIndex + 1, it.count())
-
-                parsedData.add(Data(key, value))
-            }
+    fun convertToIOSFormat(file: File, parsedData: List<Data>) {
+        var str = ""
+        parsedData.forEach {
+            str += "\"${it.key}\" = \"${replacePlaceHolders(it.value)}\";" + System.lineSeparator()
         }
-        return parsedData
+        file.writeText(str, Charset.defaultCharset())
     }
 
 
+
+
+
+    // [%][\d]?[0-9]?[$][a-z]   IOS Pattern String interpolation
+
+
+
+    private fun replacePlaceHolders(value: String): String {
+        var newString = value
+        if (value.contains("%\$d")) {
+            newString = value.replace("%\$d", "%d")
+        }
+        if (value.contains("%\$s")) {
+            newString = value.replace("%\$s", "%@")
+        }
+        return newString
+    }
+
+
+    /**
+     * Converts placeholders from strings.xml to Localizable.strings format
+     * @param value Value from strings.xml
+     */
+    private fun replacePlaceHolder(value : String) : String {
+        val m2 = Pattern.compile(PATTERN).matcher(value)
+        while (m2.find()) {
+            val placeholder = m2.group()
+
+
+
+            break
+        }
+    }
+
 }
+
+

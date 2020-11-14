@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:id="pane" minHeight="640.0" minWidth="620.0" prefHeight="640.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="az.rasul.localized.controller.MainController">
+   <children>
+        <TextField fx:id="filePathTextField" disable="true" editable="false" layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="633.0" promptText="Select Localizable.strings or strings.xml" AnchorPane.leftAnchor="14.0" AnchorPane.rightAnchor="160.0" AnchorPane.topAnchor="14.0" />
+        <Button fx:id="browseBtn" layoutX="662.0" layoutY="14.0" mnemonicParsing="false" prefHeight="32.0" prefWidth="133.0" text="Browse" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="14.0">
+            <font>
+                <Font name="Roboto" size="13.0" />
+            </font>
+        </Button>
+        <TableView fx:id="tableView" editable="true" layoutY="63.0" prefHeight="446.0" prefWidth="775.0" AnchorPane.bottomAnchor="65.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="60.0">
+        </TableView>
+        <Label fx:id="totalCountLabel" layoutX="20.0" layoutY="559.0" prefHeight="24.0" text="Total Count : 10000" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="20.0">
+            <font>
+                <Font name="Roboto" size="10.0" />
+            </font>
+        </Label>
+        <Button fx:id="exportBtn" layoutX="682.0" layoutY="501.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="113.0" text="Export" AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="20.0">
+            <font>
+                <Font name="Roboto" size="13.0" />
+            </font>
+        </Button>
+        <Group />
+        <RadioButton fx:id="csvRdb" layoutX="632.0" layoutY="562.0" mnemonicParsing="false" text=".csv" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="160.0">
+            <toggleGroup>
+                <ToggleGroup fx:id="radioGroup" />
+            </toggleGroup>
+        </RadioButton>
+        <RadioButton fx:id="androidRdb" layoutX="340.0" layoutY="562.0" mnemonicParsing="false" text="Android( strings.xml )" toggleGroup="$radioGroup" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="221.0" />
+      <RadioButton fx:id="iosRdb" layoutX="339.0" layoutY="562.0" mnemonicParsing="false" text="Localizable.strings" AnchorPane.bottomAnchor="24.0" AnchorPane.rightAnchor="374.0" />
+   </children>
+</AnchorPane>
